@@ -1,0 +1,10 @@
+<launch>
+<!-- Spawn a robot into Gazebo -->
+<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" />
+
+<param name="/allegro_kuka/robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" />
+
+<param name="/allegro_kuka/robot_description_stl_mesh_hand" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_stl_mesh_hand.urdf.xacro'"/>
+
+
+</launch>

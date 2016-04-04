@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+	<world name="default">
+		<physics type="ode">
+			<gravity>0.000000 0.000000 0.00000</gravity>
+			<ode>
+				<solver>
+					<type>quick</type>
+					<iters>50</iters>
+					<precon_iters>0</precon_iters>
+					<sor>1.300000</sor>
+				</solver>
+				<constraints>
+				</constraints>
+			</ode>
+			<max_contacts>1</max_contacts>
+
+		</physics>
+
+    <include>
+     <uri>model://sun</uri>
+   </include>
+
+   <gui>
+    <camera name="user_camera">
+      <!-- <pose>1.15 -0.05 0.9 0 0.7 -3.12</pose> -->
+      <pose>-0.1 -1.6  0.7     0 0.4 1.39</pose>
+
+    </camera>
+  </gui>
+
+
+
+
+  <!-- <pose>0.59 -0.1 0.28 1.577 0 0</pose> -->
+<model name="cylinderHandle">
+  <pose>-0.1 -0.59  0.28 1.577 0 1.57</pose>
+  <static>false</static>
+  <link name="left_wheel">
+    <pose>0 0 0 0 0 0</pose>
+
+    <collision name="collision">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>.2</length>
+        </cylinder>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass>5</mass>
+      <inertia>
+        <ixx>0.015</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>0.015</iyy>
+        <iyz>0</iyz>
+        <izz>0.001</izz>
+      </inertia>
+    </inertial>
+
+    <visual name="visual">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>0.2</length>
+        </cylinder>
+      </geometry>
+      <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Wood</name></script></material>
+    </visual>
+  </link>
+
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> left_wheel </bodyNames>
+  </plugin>
+
+</model>
+
+
+<!-- <pose>0.60 -0.08 0.21 0.0 0 0</pose> -->
+<!-- <pose>-0.08 -0.60  0.21 0.0 0 1.57</pose> -->
+<!-- weird little shape to grasp. -->
+<!--  <model name="shapetoExplore3">
+  <pose>-0.08 -0.60  0.26 0.0 1.4 1.57</pose>
+  <include>
+    <uri>model://shapeToExplore3</uri>
+  </include>
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> shapetoExplore3::sphere1 </bodyNames>
+  </plugin>
+</model> -->
+
+
+<!-- Drill -->
+<!-- <pose>0.55 -0.22 0.22 -1.57 0 0</pose> -->
+<!-- <pose>-0.22 -0.55  0.22 -1.57 0 1.57</pose> -->
+  <!-- <pose>-0.21 -0.60  0.22 -1.54 0 -1.57</pose> -->
+  <!-- <pose>-0.15 -0.60  0.22 -1.54 0 -1.57</pose> -->
+<!-- array.data = [0.08,0,0.05, 0,0,0] -->
+<!-- <model name="shapetoExplore3" >
+  <pose>-0.07 -0.60  0.27 -1.54 0 -1.57</pose>
+
+  <include>
+    <pose>0 0.04 -0.13 0 0 0</pose>
+    <uri>model://cordless_drill</uri>
+  </include>
+
+  <link name="temp_link">
+    <pose>0 0 0 0 0 0</pose>
+    <inertial>
+      <mass>0.1</mass>
+      <inertia>
+        <ixx>0.0001</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>0.0001</iyy>
+        <iyz>0</iyz>
+        <izz>0.0001</izz>
+      </inertia>
+    </inertial>
+  </link>
+
+  <joint name="joint1" type="fixed">
+    <parent>drill::link</parent>
+    <child>temp_link</child>
+  </joint>
+
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> temp_link </bodyNames>
+  </plugin>
+</model> -->
+
+
+
+
+<!-- Wheel  -->
+<!-- <pose>0.52 -0.08 0.21 -1.57 0.3 0</pose> -->
+<!-- <model name="shapetoExplore3" >
+  <pose>-0.08 -0.52  0.21 -1.57 0.3 1.57</pose>
+  <include>
+    <uri>model://drc_practice_handle_wheel_valve</uri>
+  </include>
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> handle_wheel_valve::handle </bodyNames>
+  </plugin>
+</model> -->
+
+<!-- Door Handle -->
+<!-- <pose>0.56 -0.19 0.20 0 0 1.57</pose> -->
+<!-- <model name="shapetoExplore3" >
+  <pose> -0.19 -0.56 0.20 0 0 0</pose>
+  <include>
+    <uri>model://door_handle</uri>
+  </include>
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> door_handle::handle </bodyNames>
+  </plugin>
+</model> -->
+
+
+
+
+
+
+
+<model name ='table'>
+ <static>true</static>
+ <pose>0 0 0.01 0 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry>
+    <box><size>3 3 0.019</size></box>
+  </geometry>
+</collision>
+<visual name ='visual'>
+ <geometry>
+  <box><size>3 3  0.019</size></box>
+</geometry>
+<material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+<name>Gazebo/Wood</name></script></material>
+</visual>
+</link>
+</model>
+
+
+
+
+<model name="IndicatorDebug">
+  <pose>0 0.1 0.4 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+<!-- NEW STUFF ! -->
+
+
+
+<model name="Indicator">
+  <pose>0 0 -0.2 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+</world>
+</sdf>
+
+
+
+
+
+<!--    <model name="des_pos_indicator">
+    <pose>0.1 0.1 0.9 0 0 0 </pose>
+    <include>
+      <static>true</static>
+      <uri>model://target</uri>
+    </include>
+  </model> -->

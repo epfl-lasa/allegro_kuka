@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+	<world name="default">
+		<physics type="ode">
+			<gravity>0.000000 0.000000 0.00000</gravity>
+			<ode>
+				<solver>
+					<type>quick</type>
+					<iters>50</iters>
+					<precon_iters>0</precon_iters>
+					<sor>1.300000</sor>
+				</solver>
+				<constraints>
+					<!--cfm>0.000100</cfm--> 	<!-- cfm: Between 0.0001 and 0.001 works well (0.001 allows a bit too much elasticity)-->
+					<!--erp>0.100000</erp-->
+					<!--contact_max_correcting_vel>10.0000</contact_max_correcting_vel--> 	<!-- contact_max_correcting_vel: 	Max vel that contacts can generate-->
+					<!--contact_surface_layer>0.001000</contact_surface_layer--> 			<!-- contact_surface_layer: 		Increasing  may improve sensibility-->
+				</constraints>
+			</ode>
+			<max_contacts>1</max_contacts>
+			<!--real_time_update_rate>0.001</real_time_update_rate-->
+			<!--max_step_size>0.001000</max_step_size-->
+		</physics>
+
+    <include>
+     <uri>model://sun</uri>
+   </include>
+
+   <gui>
+    <camera name="user_camera">
+      <pose>1.15 -0.05 0.9 0 0.7 -3.12</pose>
+    </camera>
+  </gui>
+
+
+
+
+<!-- <model name="cylinderHandle">
+  <pose>0.59 -0.1 0.28 1.577 0 0</pose>
+  <static>false</static>
+  <link name="left_wheel">
+    <pose>0 0 0 0 0 0</pose>
+
+    <collision name="collision">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>.2</length>
+        </cylinder>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass>5</mass>
+      <inertia>
+        <ixx>0.015</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>0.015</iyy>
+        <iyz>0</iyz>
+        <izz>0.001</izz>
+      </inertia>
+    </inertial>
+
+    <visual name="visual">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>0.2</length>
+        </cylinder>
+      </geometry>
+      <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Wood</name></script></material>
+    </visual>
+  </link>
+
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> left_wheel </bodyNames>
+  </plugin>
+
+</model> -->
+
+
+<!-- weird little shape to grasp. -->
+<!-- <model name="shapetoExplore3">
+  <pose>0.60 -0.08 0.21 0.0 0 0</pose>
+  <include>
+    <uri>model://shapeToExplore3</uri>
+  </include>
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> shapetoExplore3::sphere1 </bodyNames>
+  </plugin>
+</model> -->
+
+
+
+
+
+
+<model name ='table'>
+ <static>true</static>
+ <pose>0 0 0.01 0 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry>
+    <box><size>3 3 0.019</size></box>
+  </geometry>
+</collision>
+<visual name ='visual'>
+ <geometry>
+  <box><size>3 3  0.019</size></box>
+</geometry>
+<material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+<name>Gazebo/Wood</name></script></material>
+</visual>
+</link>
+</model>
+
+
+
+<!-- ADD THE REFERENTIALS -->
+<!-- <model name="ref_0">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_1">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_2">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_3">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_4">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_5">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_6">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_7">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_8">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_9">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_10">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_11">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_12">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_13">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_14">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_15">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_16">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_17">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_18">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_19">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_20">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_21">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model>
+<model name="ref_22">
+  <pose>0 0.0 -0.1 0 0 0</pose>
+  <include><uri>model://referential_small</uri></include>
+</model> -->
+
+
+
+
+
+<model name="IndicatorDebug">
+  <pose>0 0.1 0.4 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+<!-- NEW STUFF ! -->
+
+
+<!-- 
+<model name ='cup1'>
+ <static>true</static>
+ <pose>0.6 -0.3 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse1c.dae</uri>
+     <scale> 0.0025 0.0025 0.0025</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse1c.dae</uri>
+   <scale> 0.0025 0.0025 0.0025</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+<!-- Flat cup 1 -->
+<!-- <model name ='cup1b'>
+ <static>true</static>
+ <pose>0.3 -0.3 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse1c.dae</uri>
+     <scale> 0.003 0.0015 0.003</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse1c.dae</uri>
+   <scale> 0.003 0.0015 0.003</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+ <!-- <pose>-0.1 -0.8 0.02 1.57 0 0</pose> -->
+<!-- <model name ='cup2'>
+ <static>true</static>
+ <pose>0.6 -0.05 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse2b.dae</uri>
+     <scale> 0.002 0.002 0.002</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse2b.dae</uri>
+   <scale> 0.002 0.002 0.002</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+<!-- <model name ='cup2b'>
+ <static>true</static>
+ <pose>0.35 -0.05 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse2b.dae</uri>
+   <scale> 0.0018 0.0012 0.0018</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse2b.dae</uri>
+   <scale> 0.0018 0.0012 0.0018</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+
+<!-- <model name ='cup3'>
+ <static>true</static>
+ <pose>0.6 0.2 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse3.dae</uri>
+     <scale> 0.002 0.0025 0.002</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse3.dae</uri>
+   <scale> 0.002 0.0025 0.002</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+<!-- <model name ='cup3b'>
+ <static>true</static>
+ <pose>0.35 0.2 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse3.dae</uri>
+     <scale> 0.0018 0.0018 0.0018</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse3.dae</uri>
+   <scale> 0.0018 0.0018 0.0018</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+<!-- <model name ='cup3c'>
+ <static>true</static>
+ <pose>0.15 0.2 0.02 1.57 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <mesh>
+     <uri>model://other/tasse3.dae</uri>
+     <scale> 0.002 0.002 0.002</scale>
+   </mesh>
+ </geometry>
+</visual>
+<collision name ='visual'>
+ <geometry>
+  <mesh>
+   <uri>model://other/tasse3.dae</uri>
+   <scale> 0.002 0.002 0.002</scale>
+ </mesh>
+</geometry>
+</collision>
+</link>
+</model> -->
+
+
+
+
+
+
+
+<!-- <model name="ring">
+    <pose>0.6 0.4 0.40 0 1.577 0.7</pose>
+  <include>
+    <static>true</static>
+    <uri>model://ring</uri>
+  </include>
+</model> -->
+
+
+
+
+
+<model name="Indicator">
+  <pose>0 0 -0.2 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+</world>
+</sdf>
+
+
+
+
+
+<!--    <model name="des_pos_indicator">
+    <pose>0.1 0.1 0.9 0 0 0 </pose>
+    <include>
+      <static>true</static>
+      <uri>model://target</uri>
+    </include>
+  </model> -->
