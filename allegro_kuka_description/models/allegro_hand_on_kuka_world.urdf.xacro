@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot name="LWR" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- <xacro:include filename="$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro" /> -->
+    <xacro:include filename="$(find allegro_kuka_description)/models/allegro_hand_on_kuka_stl_mesh_hand.urdf.xacro" />
+    <xacro:include filename="$(find allegro_kuka_description)/models/table.urdf.xacro" />
+</robot>
