@@ -1,21 +1,5 @@
 <launch>
-	<!-- Spawn a robot into Gazebo -->
-
-
-
+	<!-- Delete robot from gazebo -->
   <node pkg="rosservice" type="rosservice" name="delete_model" args="call gazebo/delete_model '{model_name: arm_base}'"/>
-
-
-  <!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_hand_description_nico)/models/allegro_hand_only.urdf.xacro'" /> -->
-
-
-	<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" /> -->
-  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model arm_base" /> -->
-  <!-- CHANGE THE MODEL NAME ANONYMOUSLY ??? -->
-
-
-
-  <!-- <node pkg="rosservice" type="rosservice" name="global_loc2" args="call gazebo/delete_model '{model_name: Indicator}'"/> -->
-  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-file  -urdf -model target Indicator" /> -->
 
 </launch>

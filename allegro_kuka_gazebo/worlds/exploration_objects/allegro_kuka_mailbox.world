@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+	<world name="default">
+		<physics type="ode">
+			<gravity>0.000000 0.000000 0.00000</gravity>
+			<ode>
+				<solver>
+					<type>quick</type>
+					<iters>50</iters>
+					<precon_iters>0</precon_iters>
+					<sor>1.300000</sor>
+				</solver>
+				<constraints>
+					<!--cfm>0.000100</cfm--> 	<!-- cfm: Between 0.0001 and 0.001 works well (0.001 allows a bit too much elasticity)-->
+					<!--erp>0.100000</erp-->
+					<!--contact_max_correcting_vel>10.0000</contact_max_correcting_vel--> 	<!-- contact_max_correcting_vel: 	Max vel that contacts can generate-->
+					<!--contact_surface_layer>0.001000</contact_surface_layer--> 			<!-- contact_surface_layer: 		Increasing  may improve sensibility-->
+				</constraints>
+			</ode>
+			<max_contacts>1</max_contacts>
+			<!--real_time_update_rate>0.001</real_time_update_rate-->
+			<!--max_step_size>0.001000</max_step_size-->
+		</physics>
+
+    <include>
+     <uri>model://sun</uri>
+   </include>
+
+   <gui>
+    <camera name="user_camera">
+      <!-- <pose>1.15 -0.05 0.9 0 0.7 -3.12</pose> -->
+      <!-- Cups on the side (better joint ranges):  -->
+      <pose>-0.1 -1.6  0.7     0 0.4 1.39</pose>
+    </camera>
+  </gui>
+
+
+  <model name ='table'>
+   <static>true</static>
+   <pose>0 0 0.01 0 0 0</pose>
+   <!-- <pose>0 0 -1.01 0 0 0</pose> -->
+   <link name ='table_link'>
+    <pose>0 0 0 0 0 0</pose>
+  <visual name ='visual'>
+   <geometry>
+    <box><size>3 3  0.019</size></box>
+  </geometry>
+  <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+  <name>Gazebo/Wood</name></script></material>
+</visual>
+</link>
+</model>
+
+
+<model name="IndicatorDebug">
+  <pose>0 0.1 0.4 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+<model name="Indicator">
+  <pose>0 0 -0.2 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://referential</uri>
+  </include>
+</model>
+
+
+<model name="Mailbox">
+  <pose>-0.5 0.0 -0.7 0 0 0</pose>
+  <include>
+    <static>true</static>
+    <uri>model://mailbox</uri>
+    <scale> 0.025 0.025 0.025</scale>
+  </include>
+</model>
+
+
+
+  <model name="des_pos_indicator">
+    <pose>0.1 0.1 0.9 0 0 0 </pose>
+    <include>
+      <static>true</static>
+      <uri>model://target</uri>
+    </include>
+  </model>
+
+
+
+
+</world>
+</sdf>
+
+

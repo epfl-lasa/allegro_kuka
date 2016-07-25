@@ -1,0 +1,24 @@
+<launch>
+	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+	<arg name="gui" default="true"/>
+	<arg name="file" default="mailbox"/>
+	<arg name="joint_limits_released" default="0"/>
+
+	
+	<include file="$(find lwr_gazebo)/launch/my_world.launch">
+		<arg name="world_name" value="$(find allegro_kuka_gazebo)/worlds/exploration_objects/allegro_kuka_$(arg file).world"/>
+		<arg name="gui" value="$(arg gui)"/>
+	</include>
+
+
+	<!-- Spawn shadow hand -->
+	<arg name="robot_param" default="robot_description" />
+
+	<!-- <param name="$(arg robot_param)" command="$(find xacro)/xacro.py '$(find sr_description)/robots/shadowhand_left_motor.urdf.xacro'" /> -->
+	<param name="$(arg robot_param)" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/sh_hand_on_kuka.urdf.xacro'" />
+
+	<node name="spawn_urdf2" pkg="gazebo_ros" type="spawn_model" args="-param $(arg robot_param) -urdf -model arm_base2" />
+
+
+
+</launch>

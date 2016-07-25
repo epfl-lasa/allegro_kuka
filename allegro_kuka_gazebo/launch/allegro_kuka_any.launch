@@ -1,22 +1,39 @@
 <launch>
-	<!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
-	<!-- <include file="$(find gazebo_ros)/launch/empty_world.launch"> -->
+	<!-- [We resume the logic in empty_world.launch, changing only the name of the world to be launched] -->
 	<arg name="gui" default="true"/>
 	<arg name="file" default="mailbox"/>
+	<arg name="joint_limits_released" default="0"/>
+
 	
 	<include file="$(find lwr_gazebo)/launch/my_world.launch">
-		<arg name="world_name" value="$(find allegro_kuka_gazebo)/worlds/allegro_kuka_$(arg file).world"/>
+		<arg name="world_name" value="$(find allegro_kuka_gazebo)/worlds/exploration_objects/allegro_kuka_$(arg file).world"/>
 		<arg name="gui" value="$(arg gui)"/>
-		<!-- more default parameters can be changed here -->
 	</include>
 
 
-	<!-- Spawn a robot into Gazebo -->
+	<!-- [Spawn a robot into Gazebo (SIMPLEST VERSION)] -->
 	<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" /> -->
-	<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_world.urdf.xacro'" />
+
+
+	<group if="$(arg joint_limits_released)">
+		<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_released_limits_on_kuka.urdf.xacro'" />
+	</group>
+
+	<group unless="$(arg joint_limits_released)">
+		<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" />
+	</group>
+
+	<!-- [DEBUG: axischange(movedThumb)] -->
+	<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_axischanged.urdf.xacro'" /> -->
+
+
+
+	<!-- [Robot with "world" (now, just the robot, nothing else)]-->
+	<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_world.urdf.xacro'" /> -->
+
+	<!-- [Robot with special mesh (just for rviz, not sure why, so not used here)] -->
 	<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_stl_mesh_hand.urdf.xacro'" /> -->
 
-	<param name="/allegro_kuka/robot_description_stl_mesh_hand" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_stl_mesh_hand.urdf.xacro'"/>	
 
 	<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model arm_base" />
 

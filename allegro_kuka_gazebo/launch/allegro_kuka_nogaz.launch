@@ -1,13 +1,22 @@
 <launch>
-<!-- Spawn a robot into Gazebo -->
-<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" />
 
-<param name="/allegro_kuka/robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" />
+
+<arg name="file"             default="allegro_hand_on_kuka"/>
+<!-- <arg name="file"             default="allegro_hand_on_kuka_axischanged"/> -->
+
+<!-- Spawn a robot into Gazebo -->
+<!-- <param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" /> -->
+<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/$(arg file).urdf.xacro'" />
+
+<!-- same one with different parameter name -->
+<!-- <param name="/allegro_kuka/robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" /> -->
+<param name="/allegro_kuka/robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/$(arg file).urdf.xacro'" />
 
 <!-- <param name="/allegro_kuka/robot_description_withobjects" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_world.urdf.xacro'" /> -->
 
-<!-- Replaced with the "withobjects" model which also uses stl mesh -->
+<!-- [Replaced with the "withobjects" model which also uses stl mesh] -->
 <param name="/allegro_kuka/robot_description_stl_mesh_hand" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka_stl_mesh_hand.urdf.xacro'"/>
+<!-- <param name="/allegro_kuka/robot_description_stl_mesh_hand" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/$(arg file).urdf.xacro'"/> -->
 
 
 </launch>
