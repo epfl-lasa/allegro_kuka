@@ -73,4 +73,14 @@
 
     <!-- Hand -->
     <xacro:ahand left="-1" parent_link="lwr_arm_7_link" prefix="ahand" rpy="0 0 0" xyz="0 0 0.1"/>
+
+
+    <link name="lwr_exploration_ee"/>
+
+    <joint name="lwr_exploration_ee_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.04 0.0 0.09"/>
+        <parent link="lwr_arm_7_link"/>
+        <child link="lwr_exploration_ee"/>
+    </joint>
+
 </robot>
