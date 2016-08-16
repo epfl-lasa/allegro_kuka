@@ -1,0 +1,94 @@
+<robot name="LWR" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Some macros used by the urdf -->
+    <xacro:include filename="$(find lwr_description)/model/kuka_lwr_arm.urdf.xacro"/>
+    <xacro:include filename="$(find lwr_description)/model/materials.xml"/>
+    <xacro:include filename="$(find allegro_hand_description_nico)/models/common.urdf.xacro"/>
+    <xacro:include filename="$(find allegro_hand_description_nico)/models/hand.urdf.xacro"/>
+
+    <!-- This plugin outputs the robot's joint positions and inputs joint torques -->
+    <gazebo>
+        <plugin filename="libmy_robot_plugin.so" name="input_all_torques">
+            <topicName>/lwr/input_torques/ </topicName>
+            <bodyName>lwr_arm_7_link </bodyName>
+        </plugin>
+    </gazebo>
+
+    <!-- Sets a joint position (for replay)  -->
+    <gazebo>
+        <plugin filename="libset_joint_position_plugin.so" name="set_joint_position">
+            <topicName>/set_gazebo_joint_states </topicName>
+        </plugin>
+    </gazebo>
+
+    <!-- Streams the contacts  -->
+    <gazebo>
+        <plugin filename="libgazebo_ros_my_contact_plugin.so" name="link_collision_sensor">
+            <always_on>true</always_on>
+            <update_rate>20</update_rate>
+            <bumperTopicName>/link_collision_sensor</bumperTopicName>
+        </plugin>
+    </gazebo>
+
+
+<!--         <gazebo>
+        <plugin filename="libgazebo_ros_my_world_manager_plugin.so" name="world_manager">
+            <always_on>true</always_on>
+            <update_rate>20</update_rate>
+            <bumperTopicName>/link_collision_sensor</bumperTopicName>
+        </plugin>
+    </gazebo> -->
+
+        <gazebo>
+  <plugin name="mylinkforce2" filename="libgazebo_ros_force2.so">
+     <topicName> /spacenav/twist/ </topicName>    
+    <bodyNames> lwr_arm_7_link ahand::ahand_palm_link</bodyNames>
+    <!-- <bodyNames>  </bodyNames> -->
+  </plugin>
+</gazebo>
+    
+    <!-- Kuka -->
+    <kuka_lwr_arm name="lwr" parent="aluplate" right="1" tool_name="">
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+    </kuka_lwr_arm>
+
+    <!-- AluPlate -->
+    <joint name="world_joint2" type="fixed">
+        <origin rpy="0 0 0" xyz="0.0 0.0 0.03"/>
+        <parent link="world"/>
+        <child link="aluplate"/>
+    </joint>
+    
+    <link name="aluplate">
+        <visual>
+            <origin xyz="0 0 0.01"/>
+            <geometry>
+                <box size="0.2 0.2 0.02" xyz="0.0 0.0 0.0"/>
+            </geometry>
+            <material name="Silver"/>
+        </visual>
+        <collision name="aluplate_collision">
+            <geometry>
+                <box size="0.2 0.2 0.02" xyz="0.0 0.0 0.0"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <gazebo reference="aluplate">
+        <material value="Gazebo/Grey"/>
+    </gazebo>
+
+    <link name="world"/>
+
+    <!-- Hand -->
+    <xacro:ahand left="-1" parent_link="lwr_arm_7_link" prefix="ahand" rpy="0 0 0" xyz="0 0 0.1"/>
+
+
+    <link name="lwr_exploration_ee"/>
+
+    <joint name="lwr_exploration_ee_joint" type="fixed">
+        <origin rpy="0 0 0" xyz="0.04 0.0 0.09"/>
+        <parent link="lwr_arm_7_link"/>
+        <child link="lwr_exploration_ee"/>
+    </joint>
+
+</robot>
