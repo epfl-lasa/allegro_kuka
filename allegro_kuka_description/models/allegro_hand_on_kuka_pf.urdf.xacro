@@ -1,34 +1,12 @@
 <robot name="LWR" xmlns:xacro="http://www.ros.org/wiki/xacro">
     <!-- Some macros used by the urdf -->
     <xacro:include filename="$(find lwr_description)/model/kuka_lwr_arm.urdf.xacro"/>
+    <!-- <xacro:include filename="$(find lwr_description)/model/kuka_lwr_arm_nocollision.urdf.xacro"/> -->
     <xacro:include filename="$(find lwr_description)/model/materials.xml"/>
     <xacro:include filename="$(find allegro_hand_description_nico)/models/common.urdf.xacro"/>
     <xacro:include filename="$(find allegro_hand_description_nico)/models/hand.urdf.xacro"/>
 
     <!-- This plugin outputs the robot's joint positions and inputs joint torques -->
-<!--     <gazebo>
-        <plugin filename="libmy_robot_plugin.so" name="input_all_torques">
-            <topicName>/lwr/input_torques/ </topicName>
-            <bodyName>lwr_arm_7_link </bodyName>
-        </plugin>
-    </gazebo> -->
-
-    <!-- Sets a joint position (for replay)  -->
-<!--     <gazebo>
-        <plugin filename="libset_joint_position_plugin.so" name="set_joint_position">
-            <topicName>/set_gazebo_joint_states </topicName>
-        </plugin>
-    </gazebo> -->
-
-    <!-- Streams the contacts  -->
-<!--     <gazebo>
-        <plugin filename="libgazebo_ros_my_contact_plugin.so" name="link_collision_sensor">
-            <always_on>true</always_on>
-            <update_rate>20</update_rate>
-            <bumperTopicName>/link_collision_sensor</bumperTopicName>
-        </plugin>
-    </gazebo> -->
-
 
         <gazebo>
         <plugin filename="libgazebo_particle_filter_plugin.so" name="world_manager">
@@ -57,11 +35,11 @@
             </geometry>
             <material name="Silver"/>
         </visual>
-        <collision name="aluplate_collision">
+<!--         <collision name="aluplate_collision">
             <geometry>
                 <box size="0.2 0.2 0.02" xyz="0.0 0.0 0.0"/>
             </geometry>
-        </collision>
+        </collision> -->
     </link>
 
     <gazebo reference="aluplate">
